@@ -4,17 +4,17 @@ const fs = require('fs');
 const faker = require('faker');
 
 class Person {
-  constructor(id, firstName, lastName, email, phone, createdAt) {
-    this._id = id;
-    this._firstName = firstName;
-    this._lastName = lastName;
-    this._email = email;
-    this._phone = phone;
-    this._createdAt = new Date(createdAt);
+  constructor(props) {
+    this._id = props.id;
+    this._firstName = props.firstName;
+    this._lastName = props.lastName;
+    this._email = props.email;
+    this._phone = props.phone;
+    this._createdAt = new Date(props.createdAt);
   }
 
-  set id(id){
-    this._id = id;
+  set id(newId){
+    this._id = newId;
   }
 
   get id() {
@@ -58,7 +58,14 @@ class PersonParser {
       if (string !== '') array.push(string.split(','));
     }
     for (let i = 0; i < array.length; i += 1) {
-      result.push(new Person(...array[i]));
+      const id = array[i][0];
+      const firstName = array[i][1];
+      const lastName = array[i][2];
+      const email = array[i][3];
+      const phone = array[i][4];
+      const createdAt = array[i][5];
+      const person = new Person({ id, firstName, lastName, email, phone, createdAt,})
+      result.push(person);
     }
 
     return result;
@@ -111,9 +118,9 @@ for (let i = 1; i <= 100; i += 1) {
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
   const email = faker.internet.email();
-  const phoneNumber = faker.phone.phoneNumber('1-###-###-####');
-  const date = faker.date.future();
-  const person = new Person(id, firstName, lastName, email, phoneNumber, date);
+  const phone = faker.phone.phoneNumber('1-###-###-####');
+  const createdAt = faker.date.future();
+  const person = new Person({id, firstName, lastName, email, phone, createdAt});
   parser.addPerson(person);
 }
 
