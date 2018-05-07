@@ -55,6 +55,8 @@ class PersonParser {
   convertToString(){
     // var string = this.addPerson();
     var data_str = '';
+    data_str += 'id,first_name,last_name,email,phone,created_at\n'
+
     for (var i = 0; i < this._people.length; i++) {
       for(var key in this._people[i]){
         if(key === 'created_at'){
