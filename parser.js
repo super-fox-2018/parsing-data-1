@@ -80,7 +80,7 @@ class PersonParser {
 
       if (i !== this._people.length - 1) string = string + '\n'
     }
-    fs.writeFileSync('people2.csv', string);
+    fs.writeFileSync('people.csv', string);
   } // override csv
 
 }
