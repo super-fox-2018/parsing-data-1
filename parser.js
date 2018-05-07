@@ -32,21 +32,22 @@ class PersonParser {
 
   get people() {
     let object ={
-      data : this._people,
-      size : this._people.length
+      data : this._people, // read all file hasil convert
+      size : this._people.length // read panjangnya
     }
      return object
   }
   
   addPerson(id,firstName,lastName,email,phone,createdAt) { // untuk nambahin orang/data baru
-    this._people.push(new Person(id,firstName,lastName,email,phone,createdAt))
+    this._people.push(new Person(id,firstName,lastName,email,phone,createdAt)) // panggil class Person biar sesuai/kebaca parameternya
   }
 
   save(){
     var str =""
     for(let i=0; i<this._people.length; i++){
-      var valuesJoin=Object.values(this._people[i]).join(",")
-      str +=  valuesJoin + "\n"
+      // Object.values itu dipakai buat kembalikan sebuah object menjadi array, kemudian di join biar jadi string
+      var valuesJoin=Object.values(this._people[i]).join(",") 
+      str +=  valuesJoin + '\n' 
     }
     fs.writeFileSync('people.csv', str, 'utf8')
   }
@@ -54,8 +55,13 @@ class PersonParser {
 
 var parser = new PersonParser('people.csv')
 parser.convertAllPeople()
-parser.addPerson(201, "tia", "anggraeni", "test@mail.com", "12345679", new Date())
-console.log(parser.people.data[201])
+// kenapa dibawah dikurangi 1 terus ditambah 1, karena kalau nggak gitu nomer nya ke skip satu pas setelah nomer 200 jadi 202, harusnya 201
+// trus parser.people.size ini untuk baca brapa banyaknya yg ada di get people() diatas
+parser.addPerson(parser.people.size -1 + 1, "setia", "anggraeni", "test@mail.com", "243156724", new Date())
 parser.save()
-
-console.log(`There are ${parser.people.size} people in the file '${parser._file}'.`)
+//size dibawah dikurangi 1 karena kalau enggak nanti kebacanya 202, karena baris pertama untuk id
+// kebaca, makanya dikurangi 1
+console.log(`There are ${parser.people.size-1} people in the file ${parser._file}.`)
+// console.log pertama berhasil, tapi kalau bikin console.log lagi setelah data yg baru di add
+// dibawahnya ada baris kosong. apa karena diatas yg di function save() ada '\n' karena ini buat bikin baris
+// tapi kalau nggak ada '\n' csv nya jadi manjang kesamping semua
