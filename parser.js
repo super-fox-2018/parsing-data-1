@@ -23,7 +23,7 @@ class PersonParser {
   }
 
   get people() {
-    console.log(this._people);
+    // console.log(this._people);
     return this._people
   }
 
@@ -46,14 +46,14 @@ class PersonParser {
       }
     }
   }
-  addPerson() {
-    var pers = new Person(this._people.length+1,'shanti','dyah','shantidyah@gmail.com','0987635382','2017-11-02T07:08:44-09:00');
+  addPerson(firstname, lastname,email,phone,created_at) {
+    var pers = new Person(this._people.length+1,firstname, lastname,email,phone,new Date(created_at));
     this._people.push(pers);
     return this._people;
   }
 
   convertToString(){
-    var string = this.addPerson();
+    // var string = this.addPerson();
     var data_str = '';
     for (var i = 0; i < this._people.length; i++) {
       for(var key in this._people[i]){
@@ -76,7 +76,7 @@ class PersonParser {
 
 var peop = fs.readFileSync('people.csv','utf8').split('\n');
 let parser = new PersonParser(peop);
-parser.addPerson()
+parser.addPerson('shanti','dyah','shantidyah@gmail.com','085678329812','2015-03-23T17:00:56-09:00')
 
 
 let data_str = parser.convertToString()
