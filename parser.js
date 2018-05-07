@@ -29,9 +29,21 @@ class PersonParser {
     return this._people;
   }
 
-  addPerson(object) {
-    let newPerson = [object.id, object.firstName, object.lastName, object.email, object.phone, object.createdAt];
-    this._people.push(new Person(...newPerson));
+  addPerson(num) {
+    for (let i = 0; i < num; i++) {
+      let randomFirstName = faker.name.firstName();
+      let randomLastName = faker.name.lastName();
+      let randomEmail = faker.internet.email();
+      let randomPhone = faker.phone.phoneNumber();
+      let newPerson = [];
+      newPerson.push(String(this._people.length + 1));
+      newPerson.push(randomFirstName);
+      newPerson.push(randomLastName);
+      newPerson.push(randomEmail);
+      newPerson.push(randomPhone);
+      newPerson.push(new Date());
+      this._people.push(new Person(...newPerson));
+    }
   }
 
   arrayOfObjectToArray () {
@@ -46,21 +58,16 @@ class PersonParser {
 }
 
 const fs = require('fs');
-const faker = require('fake');
-let randomFirstName = faker.name.firstName();
-let randomLastName = faker.name.lastName();
-let randomEmail = faker.internet.email();
-let random = faker.phone.phoneNumber();
+const faker = require('faker');
 
 let parser = new PersonParser('people.csv');
-let michael = new Person('201', 'Michael', 'Cangcianno', 'mc@mail.com', '1-1234-567-8901', new Date());
 
 parser.people();
-parser.addPerson(michael);
+parser.addPerson(100);
 parser.arrayOfObjectToArray();
 
 console.log(parser._people);
 
-// fs.writeFileSync('people2.csv', parser._array.join('\n')); // uncomment to start overwrite the people.csv
+fs.writeFileSync('people.csv', parser._array.join('\n'));
 
 console.log(`There are ${parser._people.length} people in the file '${parser._file}'.`);
