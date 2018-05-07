@@ -4,7 +4,8 @@
   "description": "",
   "main": "parser.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reset-csv": "node reset-csv.js people-default.csv people.csv"
   },
   "repository": {
     "type": "git",

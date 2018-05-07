@@ -78,6 +78,3 @@ console.log(`There are ${parser.people.length} people in the file '${parser.file
 // parser.save();
 
 // console.log(`There are ${parser.people.length} people in the file '${parser.file}'.`);
-
-
-
