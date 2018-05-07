@@ -51,7 +51,7 @@ class PersonParser {
   }
 
   save() {
-    const string = stringify(this._people);
+    const string = stringify(this._people, { header: true });
     fs.writeFileSync('people.csv', string);
   }
 }
