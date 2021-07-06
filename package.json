@@ -1,0 +1,24 @@
+{
+  "name": "parsing-data-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reset-csv": "node reset-csv.js people-default.csv people.csv"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/super-fox-2018/parsing-data-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/super-fox-2018/parsing-data-1/issues"
+  },
+  "homepage": "https://github.com/super-fox-2018/parsing-data-1#readme",
+  "dependencies": {
+    "csv": "^3.0.2",
+    "faker": "^4.1.0"
+  }
+}
